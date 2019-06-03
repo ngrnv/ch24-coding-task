@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,6 +11,7 @@ const MODULES = [
   BrowserAnimationsModule,
   FormsModule,
   ReactiveFormsModule,
+  ScrollingModule
 ];
 
 const COMPONENTS = [

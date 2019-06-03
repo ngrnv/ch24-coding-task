@@ -24,7 +24,24 @@ ch24-dropdown {
     top: 0px;
     left: 0px;
     position: absolute;
+    overflow: auto;
+    max-height: 300px;
+    min-width: 100%;
     transform: translate(0px, 38px);
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+  }
+
+  &__item{
+    padding: .75rem 1.5rem;
   }
 
 }

@@ -1,3 +1,7 @@
-<p>
-  dropdown-menu works!
-</p>
+<div *ngFor="let i of items">
+  <ng-container *ngTemplateOutlet="itemTemplate ? itemTemplate : defaultMenuItem;context:{item: i}"></ng-container>
+</div>
+
+<ng-template #defaultMenuItem let-item="item">
+  <button class="dropdown-item ch24-dropdown__item">{{item?.label}}</button>
+</ng-template>>

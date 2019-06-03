@@ -12,23 +12,27 @@ export class DropdownComponent implements OnInit {
   @Input() placeholder: string;
 
   selectedItem: ListItem<any> = null;
-  isOpen = false;
+  _isOpen = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  public get isOpen() {
+    return this._isOpen;
+  }
+
   public toggle() {
-    this.isOpen = !this.isOpen;
+    this._isOpen = !this.isOpen;
   }
 
   public open() {
-    this.isOpen = true;
+    this._isOpen = true;
   }
 
   public close() {
-    this.isOpen = false;
+    this._isOpen = false;
   }
 
 }

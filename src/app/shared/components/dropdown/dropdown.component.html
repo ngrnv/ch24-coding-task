@@ -3,5 +3,6 @@
   {{selectedItem?.label || placeholder}}
 </button>
 <ch24-dropdown-menu class="ch24-dropdown__menu"
+                    [items]="items"
                     *ngIf="isOpen">
 </ch24-dropdown-menu>

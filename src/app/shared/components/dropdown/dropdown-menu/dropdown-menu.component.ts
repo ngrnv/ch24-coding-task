@@ -1,11 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { ListItem } from 'src/app/shared/components/dropdown/model';
 
 @Component({
   selector: 'ch24-dropdown-menu',
   templateUrl: './dropdown-menu.component.html',
-  styleUrls: ['./dropdown-menu.component.scss']
+  styleUrls: ['./dropdown-menu.component.scss'],
 })
 export class DropdownMenuComponent implements OnInit {
+
+  @Input() items: ListItem<any>[] = [];
+  @Input() itemTemplate: TemplateRef<any>;
 
   constructor() { }
 
