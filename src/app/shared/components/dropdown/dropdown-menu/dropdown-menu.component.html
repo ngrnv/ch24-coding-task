@@ -1,5 +1,7 @@
 <div *ngFor="let i of items">
-  <ng-container *ngTemplateOutlet="itemTemplate ? itemTemplate : defaultMenuItem;context:{item: i}"></ng-container>
+  <div (click)="onSelected(i)">
+    <ng-container *ngTemplateOutlet="itemTemplate ? itemTemplate : defaultMenuItem;context:{item: i}"></ng-container>
+  </div>
 </div>
 
 <ng-template #defaultMenuItem let-item="item">

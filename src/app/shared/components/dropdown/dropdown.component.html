@@ -1,8 +1,10 @@
 <button class="btn btn-primary clickable ch24-dropdown__toggle"
         (click)="toggle()">
-  {{selectedItem?.label || placeholder}}
+  {{_selectedItem?.label || placeholder}}
 </button>
 <ch24-dropdown-menu class="ch24-dropdown__menu"
                     [items]="items"
+                    [itemTemplate]="itemTemplate"
+                    (selected)="onSelected($event)"
                     *ngIf="isOpen">
 </ch24-dropdown-menu>

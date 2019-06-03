@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { ListItem } from './model';
 
 @Component({
@@ -10,9 +10,12 @@ export class DropdownComponent implements OnInit {
 
   @Input() items: ListItem<any>[] = [];
   @Input() placeholder: string;
+  @Input() itemTemplate: TemplateRef<any>;
 
-  selectedItem: ListItem<any> = null;
-  _isOpen = false;
+  @Output() selected = new EventEmitter<ListItem<any>>();
+
+  protected _selectedItem: ListItem<any> = null;
+  protected _isOpen = false;
 
   constructor() { }
 
@@ -33,6 +36,12 @@ export class DropdownComponent implements OnInit {
 
   public close() {
     this._isOpen = false;
+  }
+
+  onSelected(item) {
+    this._selectedItem = item;
+    this.selected.emit(item);
+    this.close();
   }
 
 }

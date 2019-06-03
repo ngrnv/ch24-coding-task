@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { ListItem } from 'src/app/shared/components/dropdown/model';
 
 @Component({
@@ -11,9 +11,15 @@ export class DropdownMenuComponent implements OnInit {
   @Input() items: ListItem<any>[] = [];
   @Input() itemTemplate: TemplateRef<any>;
 
+  @Output() selected = new EventEmitter<ListItem<any>>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSelected(item: ListItem<any>) {
+    this.selected.emit(item);
   }
 
 }

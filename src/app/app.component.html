@@ -1,4 +1,16 @@
 <div class="container d-flex justify-content-center align-items-center h-100">
   <ch24-dropdown placeholder="Please select an item"
-                 [items]="items"></ch24-dropdown>
+                 [items]="items"
+                 class="m-2"
+  ></ch24-dropdown>
+  <ch24-dropdown placeholder="Please select an item"
+                 [items]="items"
+                 [itemTemplate]="myItemTemplate"
+                 class="m-2"
+  ></ch24-dropdown>
 </div>
+
+
+<ng-template #myItemTemplate let-item="item">
+  <div style="background-color: aquamarine">{{item.label}}</div>
+</ng-template>
