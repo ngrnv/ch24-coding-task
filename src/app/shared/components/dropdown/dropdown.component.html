@@ -1,4 +1,5 @@
 <button class="btn btn-primary clickable ch24-dropdown__toggle"
+        #toggleButton
         (click)="toggle()">
   {{_selectedItem?.label || placeholder}}
 </button>
@@ -6,5 +7,6 @@
                     [items]="items"
                     [itemTemplate]="itemTemplate"
                     (selected)="onSelected($event)"
+                    (keyPressed)="onKeyPressed($event)"
                     *ngIf="open$ | async">
 </ch24-dropdown-menu>

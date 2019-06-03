@@ -42,6 +42,10 @@ ch24-dropdown {
 
   &__item{
     padding: .75rem 1.5rem;
+    &:focus {
+      background-color: #e0e0e0;
+      outline: none;
+    }
   }
 
 }

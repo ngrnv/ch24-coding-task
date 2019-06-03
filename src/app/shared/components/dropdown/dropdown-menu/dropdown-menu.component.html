@@ -1,9 +1,7 @@
 <div *ngFor="let i of items">
   <div (click)="onSelected(i)">
-    <ng-container *ngTemplateOutlet="itemTemplate ? itemTemplate : defaultMenuItem;context:{item: i}"></ng-container>
+    <ch24-dropdown-menu-item [itemTemplate]="itemTemplate" [item]="i"></ch24-dropdown-menu-item>
   </div>
 </div>
 
-<ng-template #defaultMenuItem let-item="item">
-  <button class="dropdown-item ch24-dropdown__item">{{item?.label}}</button>
-</ng-template>>
+

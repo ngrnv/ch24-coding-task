@@ -1,0 +1,8 @@
+<button #elem class="ch24-dropdown__item dropdown-item">
+  <ng-container *ngTemplateOutlet="itemTemplate ? itemTemplate : defaultMenuItem;context:{item: item}"></ng-container>
+</button>
+
+
+<ng-template #defaultMenuItem let-item="item">
+  {{item?.label}}
+</ng-template>

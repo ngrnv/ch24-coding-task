@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DropdownMenuItemComponent } from './components/dropdown/dropdown-menu-item/dropdown-menu-item.component';
 import { DropdownMenuComponent } from './components/dropdown/dropdown-menu/dropdown-menu.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 
@@ -15,13 +16,14 @@ const MODULES = [
 ];
 
 const COMPONENTS = [
-  DropdownComponent
+  DropdownComponent,
+  DropdownMenuComponent,
+  DropdownMenuItemComponent
 ];
 
 @NgModule({
   declarations: [
     ...COMPONENTS,
-    DropdownMenuComponent
   ],
   imports: [
     ...MODULES,
