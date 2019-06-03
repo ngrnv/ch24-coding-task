@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import {
+  Component, ElementRef, EventEmitter, Inject, Input, NgZone, OnDestroy, OnInit, Output, TemplateRef, ViewChild,
+} from '@angular/core';
+import { untilDestroyed } from 'ngx-take-until-destroy';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { delay, filter, tap } from 'rxjs/operators';
+import { DropdownMenuComponent } from 'src/app/shared/components/dropdown/dropdown-menu/dropdown-menu.component';
+import { shouldAutoClose } from 'src/app/shared/utils';
 import { ListItem } from './model';
 
 @Component({
@@ -6,7 +14,7 @@ import { ListItem } from './model';
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent implements OnInit, OnDestroy {
 
   @Input() items: ListItem<any>[] = [];
   @Input() placeholder: string;
@@ -14,28 +22,45 @@ export class DropdownComponent implements OnInit {
 
   @Output() selected = new EventEmitter<ListItem<any>>();
 
-  protected _selectedItem: ListItem<any> = null;
-  protected _isOpen = false;
+  @ViewChild(DropdownMenuComponent, { read: ElementRef, static: false }) private ddMenu: ElementRef;
 
-  constructor() { }
+  protected _selectedItem: ListItem<any> = null;
+  private closed$ = new Subject<void>();
+  protected open$ = new BehaviorSubject<boolean>(false);
+
+  constructor(private zone: NgZone, @Inject(DOCUMENT) private document: any) {
+    this.open$
+      .pipe(
+        filter(open => open),
+        delay(100),
+        tap(() => shouldAutoClose(this.zone, this.document, this.closed$, () => this.close(), [this.ddMenu])),
+        untilDestroyed(this),
+      )
+      .subscribe();
+  }
 
   ngOnInit() {
   }
 
-  public get isOpen() {
-    return this._isOpen;
+  ngOnDestroy(): void {
+    this.close();
   }
 
   public toggle() {
-    this._isOpen = !this.isOpen;
+    if (this.open$.value) {
+      this.close();
+    } else {
+      this.open();
+    }
   }
 
   public open() {
-    this._isOpen = true;
+    this.open$.next(true);
   }
 
   public close() {
-    this._isOpen = false;
+    this.open$.next(false);
+    this.closed$.next();
   }
 
   onSelected(item) {
