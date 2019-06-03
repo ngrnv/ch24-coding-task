@@ -1,5 +1,5 @@
 {
-  "name": "akita-template",
+  "name": "ch24-coding-task",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -20,7 +20,6 @@
     "@angular/platform-browser": "~8.0.0",
     "@angular/platform-browser-dynamic": "~8.0.0",
     "@angular/router": "~8.0.0",
-    "@datorama/akita": "^3.12.1",
     "bootstrap": "^4.3.1",
     "ngx-take-until-destroy": "^5.4.0",
     "normalize.css": "^8.0.1",
@@ -33,7 +32,6 @@
     "@angular/cli": "~8.0.1",
     "@angular/compiler-cli": "~8.0.0",
     "@angular/language-service": "~8.0.0",
-    "@datorama/akita-ngdevtools": "^3.0.2",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
