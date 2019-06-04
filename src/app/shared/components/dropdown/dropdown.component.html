@@ -1,5 +1,6 @@
 <button class="btn btn-primary clickable ch24-dropdown__toggle"
         #toggleButton
+        [disabled]="_disabled"
         (click)="toggle()">
   {{_selectedItem?.label || placeholder}}
 </button>

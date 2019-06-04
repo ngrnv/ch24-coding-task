@@ -1,7 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import {
-  AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, NgZone, OnDestroy, OnInit, Output, TemplateRef, ViewChild,
+  AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Inject, Input, NgZone, OnDestroy, OnInit, Output, TemplateRef, ViewChild,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { BehaviorSubject, fromEvent, Subject } from 'rxjs';
 import { delay, filter, tap, withLatestFrom } from 'rxjs/operators';
@@ -13,8 +14,15 @@ import { Key, ListItem } from './model';
   selector: 'ch24-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DropdownComponent),
+      multi: true,
+    },
+  ],
 })
-export class DropdownComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DropdownComponent implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
 
   @Input() items: ListItem<any>[] = [];
   @Input() placeholder: string;
@@ -30,11 +38,15 @@ export class DropdownComponent implements OnInit, OnDestroy, AfterViewInit {
   private closed$ = new Subject<void>();
   protected open$ = new BehaviorSubject<boolean>(false);
 
+  protected _disabled = false;
+  protected onChange: (value: any) => void = () => {};
+  protected onTouched: () => any = () => {};
+
   constructor(private zone: NgZone, @Inject(DOCUMENT) private document: any) {
     this.open$
       .pipe(
         filter(open => open),
-        delay(100),   // wait for angular to render menu
+        delay(1),   // wait for angular to render menu
         tap(() => {
           // restore scroll and focus position
           if (this._selectedItem) {
@@ -61,7 +73,7 @@ export class DropdownComponent implements OnInit, OnDestroy, AfterViewInit {
             this.open();
           }
         }),
-        delay(100),   // wait for angular to render menu
+        delay(1),   // wait for angular to render menu
         tap(() => this.onKeyPressed(Key.ArrowDown)),
         untilDestroyed(this),
       ).subscribe();
@@ -89,7 +101,7 @@ export class DropdownComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onSelected(item) {
-    this._selectedItem = item;
+    this.writeValue(item);
     this.selected.emit(item);
     this.close();
   }
@@ -107,6 +119,23 @@ export class DropdownComponent implements OnInit, OnDestroy, AfterViewInit {
         this.menu.focusedItem = itemsArray[focusPosition - 1];
       }
     }
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this._disabled = isDisabled;
+  }
+
+  writeValue(obj: any): void {
+    this._selectedItem = obj;
+    this.onChange(obj);
   }
 
 }

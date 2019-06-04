@@ -1,13 +1,32 @@
 <div class="container d-flex justify-content-center align-items-center h-100">
-  <ch24-dropdown placeholder="Please select an item"
-                 [items]="items"
-                 class="m-2"
-  ></ch24-dropdown>
-  <ch24-dropdown placeholder="Please select an item"
-                 [items]="items"
-                 [itemTemplate]="myItemTemplate"
-                 class="m-2"
-  ></ch24-dropdown>
+  <div class="form-group d-block ml-2">
+    <label for="sel" class="d-inline-block">Select outside form</label>
+    <ch24-dropdown placeholder="Please select an item" id="sel"
+                   [items]="items"
+    ></ch24-dropdown>
+  </div>
+
+  <form [formGroup]="form" class="d-flex">
+
+    <div class="form-group d-block ml-2">
+      <label for="sel1" class="d-inline-block">Form select 1</label>
+      <ch24-dropdown formControlName="sel1" id="sel1"
+                     placeholder="Please select an item"
+                     [items]="items"
+                     [itemTemplate]="myItemTemplate"
+      ></ch24-dropdown>
+    </div>
+    <div class="form-group ml-2">
+      <label for="sel2" class="d-inline-block">Form select 2</label>
+      <ch24-dropdown formControlName="sel2" id="sel2"
+                     placeholder="Please select an item"
+                     [ch24DisableControl]="true"
+                     [items]="items"
+                     [itemTemplate]="myItemTemplate"
+      ></ch24-dropdown>
+    </div>
+  </form>
+
 </div>
 
 

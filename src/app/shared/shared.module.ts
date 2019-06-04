@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DropdownMenuItemComponent } from './components/dropdown/dropdown-menu-item/dropdown-menu-item.component';
 import { DropdownMenuComponent } from './components/dropdown/dropdown-menu/dropdown-menu.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { DisableControlDirective } from './directives/disable-control.directive';
 
 const MODULES = [
   CommonModule,
@@ -18,7 +19,8 @@ const MODULES = [
 const COMPONENTS = [
   DropdownComponent,
   DropdownMenuComponent,
-  DropdownMenuItemComponent
+  DropdownMenuItemComponent,
+  DisableControlDirective
 ];
 
 @NgModule({

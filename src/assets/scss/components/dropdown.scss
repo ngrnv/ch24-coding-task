@@ -1,6 +1,6 @@
 ch24-dropdown {
-  display: inline-block;
   position: relative;
+  display: block;
 }
 
 .ch24-dropdown {
@@ -38,6 +38,7 @@ ch24-dropdown {
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;
+    z-index: 1050;
   }
 
   &__item{

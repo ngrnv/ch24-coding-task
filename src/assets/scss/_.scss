@@ -1,10 +1,12 @@
-@import '~normalize.css/normalize.css';
 @import '~bootstrap/scss/bootstrap-grid';
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/reboot';
 
 @import '~bootstrap/scss/buttons';
 @import '~bootstrap/scss/dropdown';
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/input-group';
 
 @import 'settings/';
 @import 'generic/';
