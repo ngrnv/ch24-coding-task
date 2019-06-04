@@ -93,6 +93,7 @@ export class DropdownComponent implements OnInit, OnDestroy, AfterViewInit, Cont
 
   public open() {
     this.open$.next(true);
+    this.onTouched();
   }
 
   public close() {
