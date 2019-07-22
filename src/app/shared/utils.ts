@@ -13,6 +13,9 @@ export function shouldAutoClose(zone: NgZone,
                                 isDestroyed$: Subject<any>,
                                 closeHandler: () => void,
                                 insideElements: ElementRef[]) {
+
+  // This method is often used to run performance heavy operations outside Angular zone
+  // to avoid constantly triggering change detection.
   zone.runOutsideAngular(() => {
 
     const shouldCloseOnClick = (event: MouseEvent | TouchEvent) => {
@@ -23,7 +26,7 @@ export function shouldAutoClose(zone: NgZone,
     const escapes$ = fromEvent<KeyboardEvent>(document, 'keydown')
       .pipe(
         takeUntil(isDestroyed$),
-        filter(e => e.which === 27),
+        filter(e => e.which === 27)
       );
 
     const mouseDowns$ = fromEvent<MouseEvent>(document, 'mousedown')
